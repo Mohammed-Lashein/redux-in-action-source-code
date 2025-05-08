@@ -1,5 +1,5 @@
 import "./App.css"
-import TasksPage from "./components/TasksPage/TasksPage"
+import TasksPage from "./components/TasksPage"
 
 const mockTasks = [
 	{

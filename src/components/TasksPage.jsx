@@ -1,5 +1,5 @@
 import { Component } from "react"
-import TaskList from "../TaskList/TaskList"
+import TaskList from "./TaskList/TaskList"
 
 const TASK_STATUSES = ["Unstarted", "In Progress", "Completed"]
 class TasksPage extends Component {

@@ -1,1 +1,21 @@
 @import 'tailwindcss';
+
+/* Task.jsx styles */
+.task {}
+
+.task-header {}
+
+.task-body {}
+
+/* TasksList.jsx styles */
+
+.task-list {}
+
+.task-list__title {}
+
+/* TasksPage.jsx styles */
+.tasks {}
+
+.task-lists {
+  @apply text-blue-800 bg-slate-100;
+}

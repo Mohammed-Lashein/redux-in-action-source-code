@@ -1,6 +1,5 @@
 import { Component } from "react"
-import TaskList from "./TaskList/TaskList"
-
+import TaskList from "./TaskList.jsx"
 const TASK_STATUSES = ["Unstarted", "In Progress", "Completed"]
 class TasksPage extends Component {
 	// Why didn't we need to call the constructor here ? TO UNDERSTAND

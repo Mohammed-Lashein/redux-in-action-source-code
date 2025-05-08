@@ -1,4 +1,4 @@
-import Task from "../Task/Task.jsx"
+import Task from "./Task.jsx"
 
 function TaskList(props) {
 	return (

@@ -1,13 +1,25 @@
-import { connect } from 'react-redux'
+import { connect } from "react-redux"
 import "./App.css"
 import TasksPage from "./components/TasksPage.jsx"
-import { Component } from 'react'
+import { Component } from "react"
 
 class App extends Component {
+	onCreateTask = ({ title, description }) => {
+		this.props.dispatch({
+			type: "CREATE_TASK",
+			payload: {
+				title,
+				description,
+			},
+		})
+	}
 	render() {
 		return (
 			<div className='main-content'>
-				<TasksPage tasks={this.props.tasks} />
+				<TasksPage
+					tasks={this.props.tasks}
+					onCreateTask={this.onCreateTask}
+				/>
 			</div>
 		)
 	}
@@ -16,7 +28,7 @@ class App extends Component {
 // the return value of this function will get passed to App component as props
 function mapStateToProps(state) {
 	return {
-		tasks: state.tasks
+		tasks: state.tasks,
 	}
 }
 

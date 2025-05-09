@@ -31,6 +31,18 @@ class TasksPage extends Component {
 	handleNewTaskAddition = (e) => {
 		e.preventDefault()
 		console.log("handling new task submission !")
+
+		// logic for adding new task using redux
+		this.props.onCreateTask({
+			title: this.state.cardTitle,
+			description: this.state.cardDescription,
+		})
+		// dispatch an add task => onCreateTask will be the action creator responsible for that
+
+		this.setState({
+			cardTitle: "",
+			cardDescription: "",
+		})
 	}
 	onTaskTitleChange = (e) => {
 		this.setState({ cardTitle: e.target.value })
@@ -65,7 +77,7 @@ class TasksPage extends Component {
 						onChange={(e) => this.onTaskDescriptionChange(e)}
 					/>
 				</section>
-				<button className='rounded-md bg-green-500 text-white p-3 cursor-pointer border-transparent  hover:bg-green-600 w-24'>
+				<button className='rounded-md bg-green-500 text-white p-3 cursor-pointer border-transparent  hover:bg-green-600 w-24 text-[18px]'>
 					save
 				</button>
 			</form>

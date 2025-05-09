@@ -1,26 +1,23 @@
+import { connect } from 'react-redux'
 import "./App.css"
 import TasksPage from "./components/TasksPage.jsx"
+import { Component } from 'react'
 
-const mockTasks = [
-	{
-		id: 1,
-		title: "Learn Redux",
-		description: "The store, actions, and reducers, oh my!",
-		status: "Unstarted",
-	},
-	{
-		id: 2,
-		title: "Peace on Earth",
-		description: "No big deal.",
-		status: "In Progress",
-	},
-]
-function App() {
-	return (
-		<div className='main-content'>
-			<TasksPage tasks={mockTasks} />
-		</div>
-	)
+class App extends Component {
+	render() {
+		return (
+			<div className='main-content'>
+				<TasksPage tasks={this.props.tasks} />
+			</div>
+		)
+	}
 }
 
-export default App
+// the return value of this function will get passed to App component as props
+function mapStateToProps(state) {
+	return {
+		tasks: state.tasks
+	}
+}
+
+export default connect(mapStateToProps)(App)

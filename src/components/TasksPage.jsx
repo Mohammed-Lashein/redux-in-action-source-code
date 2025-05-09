@@ -47,7 +47,7 @@ class TasksPage extends Component {
 	onTaskTitleChange = (e) => {
 		this.setState({ cardTitle: e.target.value })
 	}
-	onTaskDescriptionChange = () => {
+	onTaskDescriptionChange = (e) => {
 		this.setState({ cardDescription: e.target.value })
 	}
 	toggleNewTaskFormVisibility = () => {

@@ -37,17 +37,24 @@ class TasksPage extends Component {
 			<form
 				action=''
 				onSubmit={this.handleNewTaskAddition}
+				className='p-10 flex flex-col gap-4 items-end max-w-2xl mx-auto'
 			>
-				<button>+ New Task</button>
-				<input
-					type='text'
-					placeholder='title'
-				/>
-				<input
-					type='text'
-					placeholder='description'
-				/>
-				<button>save</button>
+				<button className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-slate-300'>+ New Task</button>
+				<section className='w-full flex gap-2 flex-col'>
+					<input
+						type='text'
+						placeholder='title'
+						className='bg-white p-2 rounded-sm w-full'
+					/>
+					<input
+						type='text'
+						placeholder='description'
+						className='bg-white p-2 rounded-sm w-full'
+					/>
+				</section>
+				<button className='rounded-md bg-green-500 text-white p-3 cursor-pointer border-transparent  hover:bg-green-600'>
+					save
+				</button>
 			</form>
 		)
 	}

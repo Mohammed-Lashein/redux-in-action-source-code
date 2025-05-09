@@ -27,8 +27,10 @@ body {
 }
 
 /* TasksPage.jsx styles */
-.tasks {}
+.tasks {
+  @apply p-10
+}
 
 .task-lists {
-  @apply grid grid-cols-1 md:grid-cols-3 gap-12 mt-70 p-10;
+  @apply grid grid-cols-1 md:grid-cols-3 gap-12;
 }

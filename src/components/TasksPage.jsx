@@ -49,13 +49,6 @@ class TasksPage extends Component {
 				onSubmit={this.handleNewTaskAddition}
 				className='p-10 flex flex-col gap-4 items-end max-w-2xl mx-auto'
 			>
-				<button
-				type='button'
-					className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-slate-300'
-					onClick={this.toggleNewTaskFormVisibility}
-				>
-					+ New Task
-				</button>
 				<section className='w-full flex gap-2 flex-col'>
 					<input
 						type='text'
@@ -79,11 +72,18 @@ class TasksPage extends Component {
 		)
 	}
 	state = {}
-	render() {
+	render() {		
 		return (
 			<>
 				<div className='tasks'>
-					{this.renderNewTaskForm()}
+				<button
+				type='button'
+					className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-slate-300'
+					onClick={this.toggleNewTaskFormVisibility}
+				>
+					+ New Task
+				</button>
+					{this.state.showNewCardForm && this.renderNewTaskForm()}
 					<div className='task-lists'>{this.renderTaskLists()}</div>
 				</div>
 			</>

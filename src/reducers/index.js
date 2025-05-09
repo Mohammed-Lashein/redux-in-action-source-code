@@ -1,4 +1,4 @@
-import { uniqueId } from '../actions'
+import { uniqueId } from "../actions"
 
 const mockTasks = [
 	{
@@ -15,7 +15,12 @@ const mockTasks = [
 	},
 ]
 
-
-export function tasks(state = {tasks: mockTasks}, action) {
-  return state
+// under the hood, the store's getState() is called and its return value is passed as the 1st arg
+//  to the reducer fn
+// the 2nd arg is the action being dispatched
+export function tasks(state = { tasks: mockTasks }, action) {
+	if (action.type === "CREATE_TASK") {
+		return { tasks: state.tasks.concat(action.payload) }
+	}
+	return state
 }

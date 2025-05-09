@@ -71,8 +71,7 @@ class TasksPage extends Component {
 			</form>
 		)
 	}
-	state = {}
-	render() {		
+	render() {
 		return (
 			<>
 				<div className='tasks'>

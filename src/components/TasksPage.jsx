@@ -33,13 +33,13 @@ class TasksPage extends Component {
 		console.log("handling new task submission !")
 	}
 	onTaskTitleChange = (e) => {
-		this.state.cardTitle = e.target.value
+		this.setState({ cardTitle: e.target.value })
 	}
 	onTaskDescriptionChange = () => {
-		this.state.cardDescription = e.target.value
+		this.setState({ cardDescription: e.target.value })
 	}
 	toggleNewTaskFormVisibility = () => {
-		this.state.showNewCardForm = !this.state.showNewCardForm
+		this.setState({ showNewCardForm: !this.state.showNewCardForm })
 		console.log(this.state.showNewCardForm)
 	}
 	renderNewTaskForm() {

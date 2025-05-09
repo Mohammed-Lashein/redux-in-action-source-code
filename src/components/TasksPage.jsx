@@ -50,6 +50,7 @@ class TasksPage extends Component {
 				className='p-10 flex flex-col gap-4 items-end max-w-2xl mx-auto'
 			>
 				<button
+				type='button'
 					className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-slate-300'
 					onClick={this.toggleNewTaskFormVisibility}
 				>

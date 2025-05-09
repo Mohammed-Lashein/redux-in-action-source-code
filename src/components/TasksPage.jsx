@@ -32,6 +32,16 @@ class TasksPage extends Component {
 		e.preventDefault()
 		console.log("handling new task submission !")
 	}
+	onTaskTitleChange = (e) => {
+		this.state.cardTitle = e.target.value
+	}
+	onTaskDescriptionChange = () => {
+		this.state.cardDescription = e.target.value
+	}
+	toggleNewTaskFormVisibility = () => {
+		this.state.showNewCardForm = !this.state.showNewCardForm
+		console.log(this.state.showNewCardForm)
+	}
 	renderNewTaskForm() {
 		return (
 			<form
@@ -39,17 +49,26 @@ class TasksPage extends Component {
 				onSubmit={this.handleNewTaskAddition}
 				className='p-10 flex flex-col gap-4 items-end max-w-2xl mx-auto'
 			>
-				<button className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-slate-300'>+ New Task</button>
+				<button
+					className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-slate-300'
+					onClick={this.toggleNewTaskFormVisibility}
+				>
+					+ New Task
+				</button>
 				<section className='w-full flex gap-2 flex-col'>
 					<input
 						type='text'
 						placeholder='title'
 						className='bg-white p-2 rounded-sm w-full'
+						value={this.state.cardTitle}
+						onChange={(e) => this.onTaskTitleChange(e)}
 					/>
 					<input
 						type='text'
 						placeholder='description'
 						className='bg-white p-2 rounded-sm w-full'
+						value={this.state.cardDescription}
+						onChange={(e) => this.onTaskDescriptionChange(e)}
 					/>
 				</section>
 				<button className='rounded-md bg-green-500 text-white p-3 cursor-pointer border-transparent  hover:bg-green-600'>

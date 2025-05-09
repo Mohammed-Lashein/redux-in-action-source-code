@@ -88,7 +88,7 @@ class TasksPage extends Component {
 			<>
 				<div className='tasks'>
 					{/* the form-container class is not used in css but just a logical wrapper */}
-					<div className='form-container flex flex-col items-end max-w-2xl gap-4 p-10'>
+					<div className='form-container flex flex-col items-end max-w-2xl gap-4 p-10 mx-auto'>
 						<button
 							type='button'
 							className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-slate-300'

@@ -3,6 +3,7 @@ function Task(props) {
 		<div className='task'>
 			<header className='task-header'>
 				<span>{props.task.title}</span>
+				<span className='font-bold'>{props.task.status}</span>
 			</header>
 			<hr />
 			<p className='task-body'>{props.task.description}</p>

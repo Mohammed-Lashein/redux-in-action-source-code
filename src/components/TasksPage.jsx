@@ -31,18 +31,20 @@ class TasksPage extends Component {
 	handleNewTaskAddition = (e) => {
 		e.preventDefault()
 		console.log("handling new task submission !")
+		const titleIsNotEmpty = this.state.cardTitle.length !== 0
+		const descriptionIsNotEmpty = this.state.cardDescription.length !== 0
 
-		// logic for adding new task using redux
-		this.props.onCreateTask({
-			title: this.state.cardTitle,
-			description: this.state.cardDescription,
-		})
-		// dispatch an add task => onCreateTask will be the action creator responsible for that
+		if (titleIsNotEmpty && descriptionIsNotEmpty) {
+			this.props.onCreateTask({
+				title: this.state.cardTitle,
+				description: this.state.cardDescription,
+			})
 
-		this.setState({
-			cardTitle: "",
-			cardDescription: "",
-		})
+			this.setState({
+				cardTitle: "",
+				cardDescription: "",
+			})
+		}
 	}
 	onTaskTitleChange = (e) => {
 		this.setState({ cardTitle: e.target.value })

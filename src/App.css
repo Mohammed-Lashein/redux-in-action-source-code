@@ -7,7 +7,11 @@ body {
 
 /* Task.jsx styles */
 .task {
-  @apply bg-white p-6
+  /* The selector we are using here uses tailwind arbitrary values . Some learning resources about it : 
+  - https://stackoverflow.com/questions/61455473/how-to-use-not-in-tailwind-css
+  - https://tailwindcss.com/docs/adding-custom-styles#arbitrary-variants
+   */
+  @apply bg-white p-6 [:not(:last-child)]:mb-4
 }
 
 .task-header {

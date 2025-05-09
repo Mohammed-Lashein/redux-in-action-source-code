@@ -47,7 +47,7 @@ class TasksPage extends Component {
 			<form
 				action=''
 				onSubmit={this.handleNewTaskAddition}
-				className='p-10 flex flex-col gap-4 items-end max-w-2xl mx-auto'
+				className=' flex flex-col gap-4 items-end w-full'
 			>
 				<section className='w-full flex gap-2 flex-col'>
 					<input
@@ -65,7 +65,7 @@ class TasksPage extends Component {
 						onChange={(e) => this.onTaskDescriptionChange(e)}
 					/>
 				</section>
-				<button className='rounded-md bg-green-500 text-white p-3 cursor-pointer border-transparent  hover:bg-green-600'>
+				<button className='rounded-md bg-green-500 text-white p-3 cursor-pointer border-transparent  hover:bg-green-600 w-24'>
 					save
 				</button>
 			</form>
@@ -75,14 +75,17 @@ class TasksPage extends Component {
 		return (
 			<>
 				<div className='tasks'>
-				<button
-				type='button'
-					className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-slate-300'
-					onClick={this.toggleNewTaskFormVisibility}
-				>
-					+ New Task
-				</button>
-					{this.state.showNewCardForm && this.renderNewTaskForm()}
+					{/* the form-container class is not used in css but just a logical wrapper */}
+					<div className='form-container flex flex-col items-end max-w-2xl gap-4 p-10'>
+						<button
+							type='button'
+							className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-slate-300'
+							onClick={this.toggleNewTaskFormVisibility}
+						>
+							+ New Task
+						</button>
+						{this.state.showNewCardForm && this.renderNewTaskForm()}
+					</div>
 					<div className='task-lists'>{this.renderTaskLists()}</div>
 				</div>
 			</>

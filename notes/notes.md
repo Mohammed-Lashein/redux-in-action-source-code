@@ -1,4 +1,4 @@
-# Chapter notes
+# Chapter 2 notes
 
 ## Note 1
 
@@ -23,3 +23,6 @@ I tried everything :
 The 2nd approach worked *partially*, because vite's HMR no longer worked on changing tailwind classes within `@apply` rule . 
 
 So it seems that the best available solution is to write these classes within the `App.css` file where we imported tailwind . This is the most working way I could come across . 
+
+_____
+# Chapter 3 notes

@@ -1,6 +1,6 @@
 import { Component } from "react"
 import TaskList from "./TaskList.jsx"
-const TASK_STATUSES = ["Unstarted", "In Progress", "Completed"]
+export const TASK_STATUSES = ["Unstarted", "In Progress", "Completed"]
 class TasksPage extends Component {
 	// Why didn't we need to call the constructor here ? TO UNDERSTAND
 	// => We needn't to interact with the props pased to this component, so react internally called super(props)

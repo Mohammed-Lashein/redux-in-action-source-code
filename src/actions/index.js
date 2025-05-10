@@ -14,12 +14,12 @@ export function createTask({ title, description }) {
 		},
 	}
 }
-export function updateTaskStatus({ id, newStatus }) {
+export function editTask(id, params = {}) {
 	return {
-		type: "UPDATE_TASK_STATUS",
+		type: "EDIT_TASK",
 		payload: {
 			id,
-			newStatus,
+			params,
 		},
 	}
 }

@@ -22,10 +22,10 @@ export function tasks(state = { tasks: mockTasks }, action) {
 	if (action.type === "CREATE_TASK") {
 		return { tasks: state.tasks.concat(action.payload) }
 	}
-	if (action.type === "UPDATE_TASK_STATUS") {
+	if (action.type === "EDIT_TASK") {
 		const updatedTasks = state.tasks.map((task) => {
 			if (task.id === action.payload.id) {
-				task.status = action.payload.newStatus
+				return Object.assign({}, task, action.payload.params)
 			}
 			return task
 		})

@@ -24,6 +24,7 @@ class TasksPage extends Component {
 					key={status}
 					status={status}
 					tasks={statusTasks}
+					onTaskStatusChange={this.props.onTaskStatusChange}
 				/>
 			)
 		})

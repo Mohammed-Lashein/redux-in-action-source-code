@@ -2,11 +2,14 @@ import { connect } from "react-redux"
 import "./App.css"
 import TasksPage from "./components/TasksPage.jsx"
 import { Component } from "react"
-import { createTask } from "./actions/index.js"
+import { createTask, updateTaskStatus } from "./actions/index.js"
 
 class App extends Component {
 	onCreateTask = ({ title, description }) => {
 		this.props.dispatch(createTask({ title, description }))
+	}
+	onTaskStatusChange = ({ id, newStatus }) => {
+		this.props.dispatch(updateTaskStatus({ id, newStatus }))
 	}
 	render() {
 		return (
@@ -14,6 +17,7 @@ class App extends Component {
 				<TasksPage
 					tasks={this.props.tasks}
 					onCreateTask={this.onCreateTask}
+					onTaskStatusChange={this.onTaskStatusChange}
 				/>
 			</div>
 		)

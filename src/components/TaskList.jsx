@@ -8,6 +8,7 @@ function TaskList(props) {
 				<Task
 					key={task.id}
 					task={task}
+					onTaskStatusChange={props.onTaskStatusChange}
 				/>
 			))}
 		</div>

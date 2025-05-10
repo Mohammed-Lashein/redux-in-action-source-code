@@ -1,15 +1,29 @@
-import { TASK_STATUSES } from './TasksPage';
+import { TASK_STATUSES } from "./TasksPage"
 function Task(props) {
+	function handleTaskStatusChange(e) {
+		props.onTaskStatusChange({ id: props.task.id, newStatus: e.target.value })
+	}
+
 	return (
 		<div className='task'>
 			<header className='task-header'>
 				<span>{props.task.title}</span>
-				<select name="task_status" id="" className='bg-blue-200 rounded-md'>
-				{TASK_STATUSES.map((status) => (
-					<option value={status} key={status}>{status}</option>
-				))}
+				<select
+					name='task_status'
+					id=''
+					className='bg-blue-200 rounded-md'
+					onChange={handleTaskStatusChange}
+					value={props.task.status}
+				>
+					{TASK_STATUSES.map((status) => (
+						<option
+							value={status}
+							key={status}
+						>
+							{status}
+						</option>
+					))}
 				</select>
-				{/* <span className='font-bold'>{props.task.status}</span> */}
 			</header>
 			<hr />
 			<p className='task-body'>{props.task.description}</p>

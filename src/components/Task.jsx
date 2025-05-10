@@ -6,7 +6,7 @@ function Task(props) {
 				<span>{props.task.title}</span>
 				<select name="task_status" id="" className='bg-blue-200 rounded-md'>
 				{TASK_STATUSES.map((status) => (
-					<option value={status}>{status}</option>
+					<option value={status} key={status}>{status}</option>
 				))}
 				</select>
 				{/* <span className='font-bold'>{props.task.status}</span> */}

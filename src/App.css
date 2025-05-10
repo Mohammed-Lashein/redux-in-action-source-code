@@ -1,0 +1,40 @@
+@import 'tailwindcss';
+
+/* App.jsx styles */
+body {
+  @apply bg-slate-100
+}
+
+/* Task.jsx styles */
+.task {
+  /* The selector we are using here uses tailwind arbitrary values . Some learning resources about it : 
+  - https://stackoverflow.com/questions/61455473/how-to-use-not-in-tailwind-css
+  - https://tailwindcss.com/docs/adding-custom-styles#arbitrary-variants
+   */
+  @apply bg-white p-6 [:not(:last-child)]:mb-4
+}
+
+.task-header {
+  @apply p-2 flex justify-between;
+}
+
+.task-body {
+  @apply p-2;
+}
+
+/* TasksList.jsx styles */
+
+.task-list {}
+
+.task-list__title {
+  @apply text-3xl font-bold pb-4
+}
+
+/* TasksPage.jsx styles */
+.tasks {
+  @apply p-10
+}
+
+.task-lists {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-12;
+}

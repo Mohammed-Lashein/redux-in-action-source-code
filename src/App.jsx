@@ -2,9 +2,23 @@ import { connect } from "react-redux"
 import "./App.css"
 import TasksPage from "./components/TasksPage.jsx"
 import { Component } from "react"
-import { createTask, editTask } from "./actions/index.js"
+import { createTask, editTask, fetchTasks } from "./actions/index.js"
+import { graphqlClient } from "./graphqlClient.js"
+
+const query = `
+	{
+		tasks {
+		id
+		title
+		description
+		}
+	}
+`
 
 class App extends Component {
+	componentDidMount() {
+		this.props.dispatch(fetchTasks())
+	}
 	onCreateTask = ({ title, description }) => {
 		this.props.dispatch(createTask({ title, description }))
 	}

@@ -1,25 +1,30 @@
-let _id = 1
-export function uniqueId() {
-	return _id++
-}
+import { graphqlClient } from "../graphqlClient"
 
-export function createTask({ title, description }) {
+export function fetchTasksSucceeded(tasks) {
 	return {
-		type: "CREATE_TASK",
+		type: "FETCH_TASKS_SUCCEEDED",
 		payload: {
-			id: uniqueId(),
-			title,
-			description,
-			status: "Unstarted",
+			tasks,
 		},
 	}
 }
-export function editTask(id, params = {}) {
-	return {
-		type: "EDIT_TASK",
-		payload: {
-			id,
-			params,
-		},
+export function fetchTasks() {
+	const getAllTasksQuery = `
+	{
+	tasks {
+	id
+	title
+	description
+	status
+		}
+	}
+	`
+	return async (dispatch) => {
+		const {
+			data: { tasks },
+		} = await graphqlClient({ query: getAllTasksQuery })
+		// console.log("data coming from the client")
+		// console.log(data);
+		dispatch(fetchTasksSucceeded(tasks))
 	}
 }

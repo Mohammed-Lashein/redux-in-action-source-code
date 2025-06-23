@@ -3,7 +3,7 @@ import TaskList from "./TaskList.jsx"
 export const TASK_STATUSES = ["Unstarted", "In Progress", "Completed"]
 class TasksPage extends Component {
 	// Why didn't we need to call the constructor here ? TO UNDERSTAND
-	// => We needn't to interact with the props pased to this component, so react internally called super(props)
+	// => We needn't  interact with the props pased to this component, so react internally called super(props)
 	// for us .
 	// But things will change now as we need to read some values from the props
 

@@ -1,5 +1,6 @@
 import { graphqlClient } from "../graphqlClient"
 
+// server action -- initiated by the server
 export function fetchTasksSucceeded(tasks) {
 	return {
 		type: "FETCH_TASKS_SUCCEEDED",
@@ -8,6 +9,7 @@ export function fetchTasksSucceeded(tasks) {
 		},
 	}
 }
+// view action -- initiated by the client
 export function fetchTasks() {
 	const getAllTasksQuery = `
 	{
@@ -26,5 +28,27 @@ export function fetchTasks() {
 		// console.log("data coming from the client")
 		// console.log(data);
 		dispatch(fetchTasksSucceeded(tasks))
+	}
+}
+export function editTask(id, params = {}) {
+	return {
+		type: "UPDATE_TASK_STATUS",
+		type: "EDIT_TASK",
+		payload: {
+			id,
+			newStatus,
+			params,
+		},
+	}
+}
+export function createTask({ title, description }) {
+	return {
+		type: "CREATE_TASK",
+		payload: {
+			id: uniqueId(),
+			title,
+			description,
+			status: "Unstarted",
+		},
 	}
 }

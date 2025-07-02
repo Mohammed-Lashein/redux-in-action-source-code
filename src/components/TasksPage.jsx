@@ -55,7 +55,6 @@ class TasksPage extends Component {
 	}
 	toggleNewTaskFormVisibility = () => {
 		this.setState({ showNewCardForm: !this.state.showNewCardForm })
-		console.log(this.state.showNewCardForm)
 	}
 	renderNewTaskForm() {
 		return (

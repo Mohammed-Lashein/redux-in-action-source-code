@@ -22,12 +22,15 @@ export function fetchTasks() {
 	}
 	`
 	return async (dispatch) => {
-		const {
-			data: { tasks },
-		} = await graphqlClient({ query: getAllTasksQuery })
-		// console.log("data coming from the client")
-		// console.log(data);
-		dispatch(fetchTasksSucceeded(tasks))
+		const { data, error } = await graphqlClient({ query: getAllTasksQuery })
+		console.log("data coming from the client")
+		console.log(data)
+		if (data) {
+			dispatch(fetchTasksSucceeded(data.tasks))
+		}
+		if (error) {
+			console.log(error)
+		}
 	}
 }
 export function editTask(id, params = {}) {
@@ -41,14 +44,46 @@ export function editTask(id, params = {}) {
 		},
 	}
 }
-export function createTask({ title, description }) {
+export function createTaskSucceeded({ title, description }) {
 	return {
-		type: "CREATE_TASK",
+		type: "CREATE_TASK_SUCCEEDED",
 		payload: {
-			id: uniqueId(),
 			title,
 			description,
+			// You can use the value returned from the query.
+			// I wrote the value manually as it is less likely to change
 			status: "Unstarted",
 		},
+	}
+}
+export function createTask({ title, description }) {
+	const createTaskQuery = `
+	mutation CREATE_TASK($title: String, $description: String, $status: String) {
+		createTask(title: $title, description: $description, status: $status) {
+			code
+			success
+			message
+			task {
+			id
+			title
+			description
+			status
+			}
+		}
+	}
+	`
+	const variables = {
+		title,
+		description,
+		status: "Unstarted",
+	}
+	return async (dispatch) => {
+		const { data, error } = await graphqlClient({ query: createTaskQuery, variables })
+
+		if (error) {
+			console.log(error)
+			return
+		}
+		dispatch(createTaskSucceeded(data.createTask.task))
 	}
 }

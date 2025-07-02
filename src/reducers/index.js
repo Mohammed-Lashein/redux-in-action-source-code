@@ -7,7 +7,7 @@ export function tasks(state = { tasks: [] }, action) {
 			tasks: action.payload.tasks,
 		}
 	}
-	if (action.type === "CREATE_TASK") {
+	if (action.type === "CREATE_TASK_SUCCEEDED") {
 		return { tasks: state.tasks.concat(action.payload) }
 	}
 	if (action.type === "EDIT_TASK") {

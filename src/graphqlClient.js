@@ -2,9 +2,10 @@ const BASE_URL = "http://localhost/redux-in-action-book-api/graphql"
 
 export const graphqlClient = async ({ query, variables }) => {
 	const queryAfterRemovingUnnecessaryCharacters = query.replaceAll(/\t|\n/g, " ")
-	const response = await fetch(BASE_URL, {
-		method: "POST",
-		/* 
+	try {
+		let res = await fetch(BASE_URL, {
+			method: "POST",
+			/* 
       A very naive mistake that costed me 30mins of debugging: 
       I wrote the headers object like so: 
       
@@ -13,16 +14,28 @@ export const graphqlClient = async ({ query, variables }) => {
       }
       Totally wrong, totally awful(very bad or unpleasant!
     */
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ query: queryAfterRemovingUnnecessaryCharacters, variables }),
-	}).catch((e) => {
-		console.log(e)
-	})
-	// console.log(JSON.stringify({ query }))
-	const json = await response.json()
-	// console.log(json)
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ query: queryAfterRemovingUnnecessaryCharacters, variables }),
+		})
+		// console.log("this is res!")
+		// console.log(res)
 
-	return json
+		res = await res.json()
+		// console.log(res)
+
+		return {
+			data: res.data,
+			error: null,
+		}
+	} catch (error) {
+		console.log(error)
+		return {
+			data: null,
+			error: {
+				message: error.message,
+			},
+		}
+	}
 }

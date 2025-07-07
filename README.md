@@ -42,3 +42,30 @@ I even double checked the backend code and found that it is returning it as a nu
 After asking chat, he pointed out that this **is intentional** since I used the type of the task id to be the scalar type `ID`.
 And from [the graphql spec](https://graphql.org/learn/schema/#scalar-types):
 >`ID`: A unique identifier, often used to refetch an object or as the key for a cache. The `ID` type is serialized in the same way as a `String`; however, defining it as an `ID` signifies that it is not intended to be human‐readable.
+
+### Note 2: Newly created tasks don't have ids?
+A very weird situation where when the newly created tasks are added to the store's state, I get the error in the `TaskList` component that `every child should have a unique key prop`.
+
+I logged the `props` passed to the `TaskList` component to see where the problem comes from, and to my surprise, I found that the newly created tasks didn't have any ids.
+
+To increase the surprise, on making a page reload (thus calling the `useEffect()` that fetches the tasks from the server) the error is gone!
+
+Looking again into the logged props, I see the ids.
+
+What is happening? 🤔
+=> After careful inspection, I found that the problem was with this code in `src/actions/index.js`
+```js
+export function createTaskSucceeded({ title, description }) {
+	return {
+		type: "CREATE_TASK_SUCCEEDED",
+		payload: {
+			title,
+			description,
+			// You can use the value returned from the query.
+			// I wrote the value manually as it is less likely to change
+			status: "Unstarted",
+		},
+	}
+}
+```
+I forgot to pass the id in the payload, thus the store's data was updated with the newly created tasks but without their ids.

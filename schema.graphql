@@ -11,21 +11,21 @@ type Task {
   status: String
 }
 type Mutation {
-  createTask(newTaskDetails: TaskInputType): CreateTaskResponseType
-  updateTaskStatus(id: ID, status: String): UpdateTaskStatusResponseType
+  createTask(newTaskDetails: TaskInput): CreateTaskResponse
+  updateTaskStatus(id: ID, status: String): UpdateTaskStatusResponse
 }
-input TaskInputType {
+input TaskInput {
   title: String
   description: String
   status: String
 }
-type CreateTaskResponseType {
+type CreateTaskResponse {
   code: Int
   success: Boolean
   message: String
   task: Task
 }
-type UpdateTaskStatusResponseType {
+type UpdateTaskStatusResponse {
   code: Int
   success: Boolean
   message: String

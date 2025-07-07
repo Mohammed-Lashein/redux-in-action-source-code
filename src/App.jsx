@@ -3,7 +3,7 @@ import "./App.css"
 import TasksPage from "./components/TasksPage.jsx"
 import { Component } from "react"
 import { createTask, editTask, fetchTasks } from "./actions/index.js"
-import { Toaster } from 'sonner'
+import { Toaster } from "sonner"
 
 class App extends Component {
 	componentDidMount() {
@@ -18,7 +18,10 @@ class App extends Component {
 	render() {
 		return (
 			<div className='main-content'>
-				<Toaster richColors position='top-right'/>
+				<Toaster
+					richColors
+					position='top-right'
+				/>
 				<TasksPage
 					tasks={this.props.tasks}
 					onCreateTask={this.onCreateTask}

@@ -34,16 +34,6 @@ export function fetchTasks() {
 		}
 	}
 }
-export function editTaskSucceeded(id, params = {}) {
-	return {
-		type: "EDIT_TASK_SUCCEEDED",
-		payload: {
-			id,
-			newStatus,
-			params,
-		},
-	}
-}
 export function createTaskSucceeded({ title, description, id }) {
 	return {
 		type: "CREATE_TASK_SUCCEEDED",
@@ -89,5 +79,49 @@ export function createTask({ title, description }) {
 		}
 		dispatch(createTaskSucceeded(data.createTask.task))
 		toast.success(data.createTask.message)
+	}
+}
+
+export function editTaskSucceeded(id, params = {}) {
+	return {
+		type: "EDIT_TASK_SUCCEEDED",
+		payload: {
+			id,
+			params,
+		},
+	}
+}
+export function editTask(id, params = {}) {
+	const updateTaskStatusMutation = `
+	mutation UPDATE_TASK_STATUS($taskId: ID, $newStatus: String) {
+		updateTaskStatus(id: $taskId, status: $newStatus) {
+			code
+			success
+			message
+			task {
+			id
+			title
+			description
+			status
+			}
+		}
+	}
+	`
+	const variables = {
+		taskId: id,
+		newStatus: params.status,
+	}
+	return async (dispatch) => {
+		const {data, error} = await graphqlClient({query: updateTaskStatusMutation, variables})
+		console.log('data coming from updateTaskStatus mutation');
+		console.log(data);
+		
+		if(error) {
+			console.log(error);
+			// add a toast for errors!
+			return
+		}
+		dispatch(editTaskSucceeded(data.updateTaskStatus.task.id, {status: data.updateTaskStatus.task.status}))
+		toast.success(data.updateTaskStatus.message)
 	}
 }

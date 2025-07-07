@@ -4,6 +4,7 @@ import TasksPage from "./components/TasksPage.jsx"
 import { Component } from "react"
 import { createTask, editTask, fetchTasks } from "./actions/index.js"
 import { graphqlClient } from "./graphqlClient.js"
+import { Toaster } from 'sonner'
 
 const query = `
 	{
@@ -28,6 +29,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className='main-content'>
+				<Toaster richColors position='top-right'/>
 				<TasksPage
 					tasks={this.props.tasks}
 					onCreateTask={this.onCreateTask}

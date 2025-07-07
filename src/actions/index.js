@@ -44,10 +44,11 @@ export function editTask(id, params = {}) {
 		},
 	}
 }
-export function createTaskSucceeded({ title, description }) {
+export function createTaskSucceeded({ title, description,id }) {
 	return {
 		type: "CREATE_TASK_SUCCEEDED",
 		payload: {
+			id,
 			title,
 			description,
 			// You can use the value returned from the query.

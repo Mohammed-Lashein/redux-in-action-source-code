@@ -34,10 +34,9 @@ export function fetchTasks() {
 		}
 	}
 }
-export function editTask(id, params = {}) {
+export function editTaskSucceeded(id, params = {}) {
 	return {
-		type: "UPDATE_TASK_STATUS",
-		type: "EDIT_TASK",
+		type: "EDIT_TASK_SUCCEEDED",
 		payload: {
 			id,
 			newStatus,

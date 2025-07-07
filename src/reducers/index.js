@@ -10,7 +10,7 @@ export function tasks(state = { tasks: [] }, action) {
 	if (action.type === "CREATE_TASK_SUCCEEDED") {
 		return { tasks: state.tasks.concat(action.payload) }
 	}
-	if (action.type === "EDIT_TASK") {
+	if (action.type === "EDIT_TASK_SUCCEEDED") {
 		const updatedTasks = state.tasks.map((task) => {
 			if (task.id === action.payload.id) {
 				return Object.assign({}, task, action.payload.params)

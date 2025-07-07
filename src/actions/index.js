@@ -1,3 +1,4 @@
+import { toast } from "sonner"
 import { graphqlClient } from "../graphqlClient"
 
 // server action -- initiated by the server
@@ -44,7 +45,7 @@ export function editTask(id, params = {}) {
 		},
 	}
 }
-export function createTaskSucceeded({ title, description,id }) {
+export function createTaskSucceeded({ title, description, id }) {
 	return {
 		type: "CREATE_TASK_SUCCEEDED",
 		payload: {
@@ -88,5 +89,6 @@ export function createTask({ title, description }) {
 			return
 		}
 		dispatch(createTaskSucceeded(data.createTask.task))
+		toast.success(data.createTask.message)
 	}
 }

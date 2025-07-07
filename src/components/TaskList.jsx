@@ -1,8 +1,6 @@
 import Task from "./Task.jsx"
 
 function TaskList(props) {
-	console.log(props);
-	
 	return (
 		<div className='task-list'>
 			<h1 className='task-list__title'>{props.status}</h1>

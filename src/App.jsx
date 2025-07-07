@@ -3,18 +3,7 @@ import "./App.css"
 import TasksPage from "./components/TasksPage.jsx"
 import { Component } from "react"
 import { createTask, editTask, fetchTasks } from "./actions/index.js"
-import { graphqlClient } from "./graphqlClient.js"
 import { Toaster } from 'sonner'
-
-const query = `
-	{
-		tasks {
-		id
-		title
-		description
-		}
-	}
-`
 
 class App extends Component {
 	componentDidMount() {

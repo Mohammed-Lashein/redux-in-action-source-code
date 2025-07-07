@@ -35,3 +35,10 @@ The 2nd approach worked *partially*, because vite's HMR no longer worked on chan
 So it seems that the best available solution is to write these classes within the `App.css` file where we imported tailwind . This is the most working way I could come across . 
 
 ## Chapter 3 notes
+
+### Note 1: Why am I getting the task id as an integer instead of a string?
+I even double checked the backend code and found that it is returning it as a number (in postman when I make the mutation, I receive the task id as an integer in the response).
+
+After asking chat, he pointed out that this **is intentional** since I used the type of the task id to be the scalar type `ID`.
+And from [the graphql spec](https://graphql.org/learn/schema/#scalar-types):
+>`ID`: A unique identifier, often used to refetch an object or as the key for a cache. The `ID` type is serialized in the same way as a `String`; however, defining it as an `ID` signifies that it is not intended to be human‐readable.

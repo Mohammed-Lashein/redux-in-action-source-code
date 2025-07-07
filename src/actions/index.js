@@ -58,8 +58,8 @@ export function createTaskSucceeded({ title, description }) {
 }
 export function createTask({ title, description }) {
 	const createTaskQuery = `
-	mutation CREATE_TASK($title: String, $description: String, $status: String) {
-		createTask(title: $title, description: $description, status: $status) {
+	mutation CREATE_TASK($newTaskDetails: TaskInput) {
+		createTask(newTaskDetails: $newTaskDetails) {
 			code
 			success
 			message
@@ -73,9 +73,11 @@ export function createTask({ title, description }) {
 	}
 	`
 	const variables = {
-		title,
-		description,
-		status: "Unstarted",
+		newTaskDetails: {
+			title,
+			description,
+			status: "Unstarted",
+		}
 	}
 	return async (dispatch) => {
 		const { data, error } = await graphqlClient({ query: createTaskQuery, variables })

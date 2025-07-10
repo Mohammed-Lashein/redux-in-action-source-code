@@ -26,6 +26,7 @@ class App extends Component {
 					tasks={this.props.tasks}
 					onCreateTask={this.onCreateTask}
 					onTaskStatusChange={this.onTaskStatusChange}
+					isLoading={this.props.isLoading}
 				/>
 			</div>
 		)

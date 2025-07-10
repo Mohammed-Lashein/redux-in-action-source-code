@@ -86,6 +86,11 @@ class TasksPage extends Component {
 		)
 	}
 	render() {
+
+		if(this.props.isLoading) {
+			return <h1 className='text-3xl'>Loading...</h1>
+		}
+
 		return (
 			<>
 				<div className='tasks'>

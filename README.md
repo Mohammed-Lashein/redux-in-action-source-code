@@ -69,3 +69,15 @@ export function createTaskSucceeded({ title, description }) {
 }
 ```
 I forgot to pass the id in the payload, thus the store's data was updated with the newly created tasks but without their ids.
+
+### Note 3: Does the each reducer in the object passed to `combineReducers` get a full copy of the whole state?  
+=> No. Each reducer gets the slice of the state that it is responsible for dealing with.
+Example
+```js
+function rootReducer(state = {}, action) {
+	return {
+		// The tasksReducer got just the tasks part of the state, not the whole state
+		tasks: tasksReducer(state.tasks, action),
+	}
+}
+```

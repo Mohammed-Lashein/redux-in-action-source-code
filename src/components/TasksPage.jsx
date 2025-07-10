@@ -1,5 +1,6 @@
 import { Component } from "react"
 import TaskList from "./TaskList.jsx"
+import { ErrorFlashMessage } from './ErrorFlashMessage.jsx'
 export const TASK_STATUSES = ["Unstarted", "In Progress", "Completed"]
 class TasksPage extends Component {
 	// Why didn't we need to call the constructor here ? TO UNDERSTAND
@@ -93,6 +94,7 @@ class TasksPage extends Component {
 
 		return (
 			<>
+					{this.props.error && <ErrorFlashMessage errorMessage={this.props.error}/>}
 				<div className='tasks'>
 					{/* the form-container class is not used in css but just a logical wrapper */}
 					<div className='form-container flex flex-col items-end max-w-2xl gap-4 p-10 mx-auto'>

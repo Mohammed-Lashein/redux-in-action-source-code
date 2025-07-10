@@ -81,3 +81,23 @@ function rootReducer(state = {}, action) {
 	}
 }
 ```
+____
+### Note 4: Why isn't `pt-0` taking effect?
+Given this following snippet from `TasksPage` component:
+```jsx
+<div className=' tasks pt-0'>
+```
+where the `tasks` class is in `App.css`:
+```css
+.tasks {
+	@apply p-10
+}
+```
+I wondered why `pt-0` wasn't taking an effect. After asking chat, he told me that tailwind resolves `apply` rule as if we wrote the tailwind classes coming after it.
+
+So why didn't `pt-0` take an effect?  
+Because the styles will be resolved based on **which comes later in the stylesheet**, since both of them have the same specificity since they are both tailwind utility classes.  
+
+The solution?  
+=> Either don't use the `apply` rule or add `pt-0` to the task class.  
+I will go with the 2nd approach.

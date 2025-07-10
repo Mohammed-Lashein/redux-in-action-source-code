@@ -4,7 +4,7 @@ const initialState = {
 }
 
 // under the hood, the store's getState() is called and its return value is passed as the 1st arg
-//  to the reducer fn
+//  to the ROOT reducer fn not the slices reducers 
 // the 2nd arg is the action being dispatched
 export function tasksReducer(state = initialState, action) {
 	if(action.type === 'FETCH_TASKS_STARTED') {

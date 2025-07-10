@@ -15,6 +15,14 @@ export function fetchTasksSucceeded(tasks) {
 		},
 	}
 }
+export function fetchTasksFailed(errorMessage) {
+	return {
+		type: "FETCH_TASKS_FAILED",
+		payload: {
+			errorMessage
+		}
+	}
+}
 // view action -- initiated by the client
 export function fetchTasks() {
 	const getAllTasksQuery = `
@@ -41,6 +49,7 @@ export function fetchTasks() {
 		}
 		if (error) {
 			console.log(error)
+			dispatch(fetchTasksFailed(error.message))
 		}
 	}
 }

@@ -1,6 +1,7 @@
 const initialState = {
 	tasks: [],
-	isLoading: false
+	isLoading: false,
+	error: null
 }
 
 // under the hood, the store's getState() is called and its return value is passed as the 1st arg
@@ -16,6 +17,18 @@ export function tasksReducer(state = initialState, action) {
 	if (action.type === "FETCH_TASKS_SUCCEEDED") {
 		return {
 			tasks: action.payload.tasks,
+		}
+	}
+	if(action.type === "FETCH_TASKS_FAILED") {
+		return {
+			...state,
+			// we need to set isLoading to false because FETCH_TASKS_STARTED sets
+			// it to true and we want to pass the condition in the TasksPage component
+			// that returns a loading indicator in order for us to be able to show
+			// the ErrorFlashMessage component along with the headers of the 
+			// kanban board
+			isLoading: false,
+			error: action.payload.errorMessage
 		}
 	}
 	if (action.type === "CREATE_TASK_SUCCEEDED") {

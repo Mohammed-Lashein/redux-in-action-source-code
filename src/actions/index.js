@@ -34,10 +34,10 @@ export function fetchTasks() {
 		console.log(data)
 		if (data) {
 			// To mimic real server delay
-			// setTimeout(() => {
-			// 	dispatch(fetchTasksSucceeded(data.tasks))
-			// }, 3000)
-			dispatch(fetchTasksSucceeded(data.tasks))
+			setTimeout(() => {
+				dispatch(fetchTasksSucceeded(data.tasks))
+			}, 1000)
+			// dispatch(fetchTasksSucceeded(data.tasks))
 		}
 		if (error) {
 			console.log(error)

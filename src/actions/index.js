@@ -41,6 +41,7 @@ export function fetchTasks() {
 		}
 		if (error) {
 			console.log(error)
+			toast.error(error.message)
 		}
 	}
 }

@@ -1,6 +1,11 @@
 import { toast } from "sonner"
 import { graphqlClient } from "../graphqlClient"
 
+export function fetchTasksStarted() {
+	return {
+		type: "FETCH_TASKS_STARTED"
+	}
+}
 // server action -- initiated by the server
 export function fetchTasksSucceeded(tasks) {
 	return {
@@ -23,10 +28,15 @@ export function fetchTasks() {
 	}
 	`
 	return async (dispatch) => {
+		dispatch(fetchTasksStarted())
 		const { data, error } = await graphqlClient({ query: getAllTasksQuery })
 		console.log("data coming from the client")
 		console.log(data)
 		if (data) {
+			// To mimic real server delay
+			// setTimeout(() => {
+			// 	dispatch(fetchTasksSucceeded(data.tasks))
+			// }, 3000)
 			dispatch(fetchTasksSucceeded(data.tasks))
 		}
 		if (error) {

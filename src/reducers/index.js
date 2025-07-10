@@ -7,6 +7,12 @@ const initialState = {
 //  to the reducer fn
 // the 2nd arg is the action being dispatched
 export function tasksReducer(state = initialState, action) {
+	if(action.type === 'FETCH_TASKS_STARTED') {
+		return {
+			...state,
+			isLoading: true
+		}
+	}
 	if (action.type === "FETCH_TASKS_SUCCEEDED") {
 		return {
 			tasks: action.payload.tasks,

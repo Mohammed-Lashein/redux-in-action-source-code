@@ -27,6 +27,7 @@ class App extends Component {
 					onCreateTask={this.onCreateTask}
 					onTaskStatusChange={this.onTaskStatusChange}
 					isLoading={this.props.isLoading}
+					error={this.props.error}
 				/>
 			</div>
 		)
@@ -35,10 +36,11 @@ class App extends Component {
 
 // the return value of this function will get passed to App component as props
 function mapStateToProps(state) {
-	const { tasks, isLoading } = state.tasks
+	const { tasks, isLoading, error } = state.tasks
 	return {
 		tasks,
 		isLoading,
+		error,
 	}
 }
 

@@ -32,7 +32,7 @@ body {
 
 /* TasksPage.jsx styles */
 .tasks {
-  @apply p-10
+  @apply p-10  pt-0
 }
 
 .task-lists {

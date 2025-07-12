@@ -105,3 +105,20 @@ I will go with the 2nd approach.
 ## Chapter 5 Notes
 ### Note 1: where does middleware live in `redux`?  
 Redux middleware is the code that sets between an action being dispatched and the store passing the action to the reducer.
+____
+### Note 2: Expanding a redux middleware function syntax
+I didn't find it in the docs, but it was in the book that I thought exposing it to the surface would be beneficial.
+```js
+const myMiddleware = store => next => action => {
+
+}
+
+ // myMiddleWareExpanded 
+ function storeWrapper(store) {
+	return function middlewareWrapper(next) {
+		return function handleAction(action) {
+			// nice unwrapping :)
+		}
+	}
+ }
+```

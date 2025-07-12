@@ -101,3 +101,7 @@ Because the styles will be resolved based on **which comes later in the styleshe
 The solution?  
 => Either don't use the `apply` rule or add `pt-0` to the task class.  
 I will go with the 2nd approach.
+
+## Chapter 5 Notes
+### Note 1: where does middleware live in `redux`?  
+Redux middleware is the code that sets between an action being dispatched and the store passing the action to the reducer.

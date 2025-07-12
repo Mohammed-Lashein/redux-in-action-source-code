@@ -64,6 +64,14 @@ export function createTaskSucceeded({ title, description, id }) {
 			// I wrote the value manually as it is less likely to change
 			status: "Unstarted",
 		},
+		meta: {
+			analytics: {
+				event: 'create_task',
+				data: {
+					id
+				}
+			}
+		}
 	}
 }
 export function createTask({ title, description }) {

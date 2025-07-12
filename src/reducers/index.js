@@ -35,17 +35,12 @@ export function tasksReducer(state = initialState, action) {
 		return { tasks: state.tasks.concat(action.payload) }
 	}
 	if (action.type === "EDIT_TASK_SUCCEEDED") {
-		const updatedTasks = state.tasks.map((task) => {
-			if (task.id === action.payload.id) {
-				return Object.assign({}, task, action.payload.params)
-			}
-			return task
-		})
-		console.log("the updatedTasks: ")
-		console.log(updatedTasks)
+		const taskToUpdate = state.tasks.find((task) => task.id === action.payload.id)
+		const tasksWithoutTaskToUpdate = state.tasks.filter((task) => task.id !== taskToUpdate.id)
 
+		let taskToUpdateWithUpdatedData = Object.assign({}, taskToUpdate, action.payload.params)
 		return {
-			tasks: updatedTasks,
+			tasks: [...tasksWithoutTaskToUpdate, taskToUpdateWithUpdatedData]
 		}
 	}
 

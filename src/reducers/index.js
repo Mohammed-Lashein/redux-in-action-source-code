@@ -41,9 +41,6 @@ export function tasksReducer(state = initialState, action) {
 			}
 			return task
 		})
-		console.log("the updatedTasks: ")
-		console.log(updatedTasks)
-
 		return {
 			tasks: updatedTasks,
 		}

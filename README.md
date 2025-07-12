@@ -34,7 +34,7 @@ The 2nd approach worked *partially*, because vite's HMR no longer worked on chan
 
 So it seems that the best available solution is to write these classes within the `App.css` file where we imported tailwind . This is the most working way I could come across . 
 
-## Chapter 3 notes
+## Chapter 4 notes
 
 ### Note 1: Why am I getting the task id as an integer instead of a string?
 I even double checked the backend code and found that it is returning it as a number (in postman when I make the mutation, I receive the task id as an integer in the response).

@@ -6,6 +6,7 @@ import { tasksReducer } from "./reducers"
 import { Provider } from "react-redux"
 import { composeWithDevTools } from "@redux-devtools/extension"
 import { thunk } from "redux-thunk"
+import { logger } from './middleware/logger/index.js'
 
 function rootReducer(state = {}, action) {
 	return {
@@ -16,7 +17,7 @@ function rootReducer(state = {}, action) {
 
 const store = createStore(
 	rootReducer,
-	composeWithDevTools(applyMiddleware(thunk))
+	composeWithDevTools(applyMiddleware(thunk, logger))
 	/* 
 		In the docs they are writing it like so :  applyMiddleware(...middleware),
 		but my intuition was correct that this syntax will throw reference error 'middleware' is not defined

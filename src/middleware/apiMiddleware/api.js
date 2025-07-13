@@ -10,7 +10,6 @@ export const apiMiddleware = (store) => (next) => async (action) => {
 
 	const { query, variables } = callApi
 	const [requestStartedType, succeededType, failureType] = callApi.types
-	debugger
 	next({ type: requestStartedType })
 
 	const { data, error } = await graphqlClient({ query, variables })

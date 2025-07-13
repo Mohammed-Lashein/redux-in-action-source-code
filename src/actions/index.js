@@ -1,28 +1,8 @@
 import { toast } from "sonner"
 import { graphqlClient } from "../graphqlClient"
+import { CALL_API } from '../middleware/apiMiddleware/api'
 
-export function fetchTasksStarted() {
-	return {
-		type: "FETCH_TASKS_STARTED"
-	}
-}
-// server action -- initiated by the server
-export function fetchTasksSucceeded(tasks) {
-	return {
-		type: "FETCH_TASKS_SUCCEEDED",
-		payload: {
-			tasks,
-		},
-	}
-}
-export function fetchTasksFailed(errorMessage) {
-	return {
-		type: "FETCH_TASKS_FAILED",
-		payload: {
-			errorMessage
-		}
-	}
-}
+
 // view action -- initiated by the client
 export function fetchTasks() {
 	const getAllTasksQuery = `
@@ -35,21 +15,11 @@ export function fetchTasks() {
 		}
 	}
 	`
-	return async (dispatch) => {
-		dispatch(fetchTasksStarted())
-		const { data, error } = await graphqlClient({ query: getAllTasksQuery })
-		console.log("data coming from the client")
-		console.log(data)
-		if (data) {
-			// To mimic real server delay
-			setTimeout(() => {
-				dispatch(fetchTasksSucceeded(data.tasks))
-			}, 1000)
-			// dispatch(fetchTasksSucceeded(data.tasks))
-		}
-		if (error) {
-			console.log(error)
-			dispatch(fetchTasksFailed(error.message))
+	return {
+		[CALL_API]: {
+			types: ['FETCH_TASKS_STARTED', 'FETCH_TASKS_SUCCEEDED', 'FETCH_TASKS_FAILED'],
+			query: getAllTasksQuery,
+			variables: {}
 		}
 	}
 }

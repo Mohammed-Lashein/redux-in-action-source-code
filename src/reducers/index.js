@@ -16,7 +16,11 @@ export function tasksReducer(state = initialState, action) {
 	}
 	if (action.type === "FETCH_TASKS_SUCCEEDED") {
 		return {
-			tasks: action.payload.tasks,
+			// no longer the case since we are using the middleware now 
+			// tasks: action.payload.tasks,
+			...state,
+			tasks: action.payload,
+			isLoading: false,
 		}
 	}
 	if(action.type === "FETCH_TASKS_FAILED") {

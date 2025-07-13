@@ -1,0 +1,33 @@
+# This file is intended as a documentation for the FE about the schema
+# I am colocating each query or mutation with its specific action creator
+
+type Query {
+  tasks: [Task]
+}
+type Task {
+  id: ID
+  title: String
+  description: String
+  status: String
+}
+type Mutation {
+  createTask(newTaskDetails: TaskInput): CreateTaskResponse
+  updateTaskStatus(id: ID, status: String): UpdateTaskStatusResponse
+}
+input TaskInput {
+  title: String
+  description: String
+  status: String
+}
+type CreateTaskResponse {
+  code: Int
+  success: Boolean
+  message: String
+  task: Task
+}
+type UpdateTaskStatusResponse {
+  code: Int
+  success: Boolean
+  message: String
+  task: Task
+}

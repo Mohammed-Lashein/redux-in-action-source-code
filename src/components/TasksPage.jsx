@@ -1,9 +1,10 @@
 import { Component } from "react"
 import TaskList from "./TaskList.jsx"
+import { ErrorFlashMessage } from './ErrorFlashMessage.jsx'
 export const TASK_STATUSES = ["Unstarted", "In Progress", "Completed"]
 class TasksPage extends Component {
 	// Why didn't we need to call the constructor here ? TO UNDERSTAND
-	// => We needn't to interact with the props pased to this component, so react internally called super(props)
+	// => We needn't  interact with the props pased to this component, so react internally called super(props)
 	// for us .
 	// But things will change now as we need to read some values from the props
 
@@ -55,7 +56,6 @@ class TasksPage extends Component {
 	}
 	toggleNewTaskFormVisibility = () => {
 		this.setState({ showNewCardForm: !this.state.showNewCardForm })
-		console.log(this.state.showNewCardForm)
 	}
 	renderNewTaskForm() {
 		return (
@@ -87,8 +87,14 @@ class TasksPage extends Component {
 		)
 	}
 	render() {
+
+		if(this.props.isLoading) {
+			return <h1 className='text-3xl'>Loading...</h1>
+		}
+
 		return (
 			<>
+					{this.props.error && <ErrorFlashMessage errorMessage={this.props.error}/>}
 				<div className='tasks'>
 					{/* the form-container class is not used in css but just a logical wrapper */}
 					<div className='form-container flex flex-col items-end max-w-2xl gap-4 p-10 mx-auto'>

@@ -1,38 +1,46 @@
-import { uniqueId } from "../actions"
-
-const mockTasks = [
-	{
-		id: uniqueId(),
-		title: "Learn Redux",
-		description: "The store, actions, and reducers, oh my!",
-		status: "Unstarted",
-	},
-	{
-		id: uniqueId(),
-		title: "Peace on Earth",
-		description: "No big deal.",
-		status: "In Progress",
-	},
-]
+const initialState = {
+	tasks: [],
+	isLoading: false,
+	error: null
+}
 
 // under the hood, the store's getState() is called and its return value is passed as the 1st arg
-//  to the reducer fn
+//  to the ROOT reducer fn not the slices reducers 
 // the 2nd arg is the action being dispatched
-export function tasks(state = { tasks: mockTasks }, action) {
-	if (action.type === "CREATE_TASK") {
+export function tasksReducer(state = initialState, action) {
+	if(action.type === 'FETCH_TASKS_STARTED') {
+		return {
+			...state,
+			isLoading: true
+		}
+	}
+	if (action.type === "FETCH_TASKS_SUCCEEDED") {
+		return {
+			tasks: action.payload.tasks,
+		}
+	}
+	if(action.type === "FETCH_TASKS_FAILED") {
+		return {
+			...state,
+			// we need to set isLoading to false because FETCH_TASKS_STARTED sets
+			// it to true and we want to pass the condition in the TasksPage component
+			// that returns a loading indicator in order for us to be able to show
+			// the ErrorFlashMessage component along with the headers of the 
+			// kanban board
+			isLoading: false,
+			error: action.payload.errorMessage
+		}
+	}
+	if (action.type === "CREATE_TASK_SUCCEEDED") {
 		return { tasks: state.tasks.concat(action.payload) }
 	}
-	if (action.type === "EDIT_TASK") {
-		const updatedTasks = state.tasks.map((task) => {
-			if (task.id === action.payload.id) {
-				return Object.assign({}, task, action.payload.params)
-			}
-			return task
-		})
-		console.log(updatedTasks)
+	if (action.type === "EDIT_TASK_SUCCEEDED") {
+		const taskToUpdate = state.tasks.find((task) => task.id === action.payload.id)
+		const tasksWithoutTaskToUpdate = state.tasks.filter((task) => task.id !== taskToUpdate.id)
 
+		let taskToUpdateWithUpdatedData = Object.assign({}, taskToUpdate, action.payload.params)
 		return {
-			tasks: updatedTasks,
+			tasks: [...tasksWithoutTaskToUpdate, taskToUpdateWithUpdatedData]
 		}
 	}
 

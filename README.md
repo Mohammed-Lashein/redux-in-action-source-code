@@ -122,3 +122,8 @@ const myMiddleware = store => next => action => {
 	}
  }
 ```
+
+### Note 2: The syntax of `CALL_API` is very weird in redux middleware  
+
+I agree with that, but this is the syntax used by the community and also in redux examples.
+It is convenient where it marks that the returned object from our action creator is to be dealt with the middleware not the reducers.

@@ -127,3 +127,15 @@ const myMiddleware = store => next => action => {
 
 I agree with that, but this is the syntax used by the community and also in redux examples.
 It is convenient where it marks that the returned object from our action creator is to be dealt with the middleware not the reducers.
+
+### Note 3: What about `response.data` that is present in this code snippet in the book?
+Yes they aren't using graphql (We are using it) but I don't understand how is the response returned in `data`.
+```js
+// Somewhere in the apiMiddleware function....
+return makeCall(callApi.endpoint)
+	.then(
+		(response) => next({type: successType, payload: response.data})
+	)
+```
+The answer: It is coming from axios. Axios does that by default unlike fetch which gives
+us the data when we use `response.json()`

@@ -3,6 +3,12 @@ import { graphqlClient } from "../graphqlClient"
 import { CALL_API } from '../middleware/apiMiddleware/api'
 
 
+// I don't know why we are exporting these action types -- where will we use them?
+export const FETCH_TASKS_STARTED = 'FETCH_TASKS_STARTED'
+export const FETCH_TASKS_SUCCEEDED = 'FETCH_TASKS_SUCCEEDED'
+export const FETCH_TASKS_FAILED = 'FETCH_TASKS_FAILED'
+
+
 // view action -- initiated by the client
 export function fetchTasks() {
 	const getAllTasksQuery = `
@@ -17,7 +23,7 @@ export function fetchTasks() {
 	`
 	return {
 		[CALL_API]: {
-			types: ['FETCH_TASKS_STARTED', 'FETCH_TASKS_SUCCEEDED', 'FETCH_TASKS_FAILED'],
+			types: [FETCH_TASKS_STARTED, FETCH_TASKS_SUCCEEDED, FETCH_TASKS_FAILED],
 			query: getAllTasksQuery,
 			variables: {}
 		}

@@ -44,7 +44,7 @@ function mapStateToProps(state) {
 	// to handle tasks fetching), so we need to be use tasks.tasks to pass it to TasksPage component in order to
 	// separate the redux logic from the presentational components
 	return {
-		tasks: tasks.tasks,
+		tasks: tasks,
 		isLoading,
 		error,
 	}

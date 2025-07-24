@@ -16,10 +16,19 @@ export function tasksReducer(state = initialState, action) {
 	}
 	if (action.type === "FETCH_TASKS_SUCCEEDED") {
 		return {
-			// no longer the case since we are using the middleware now 
-			// tasks: action.payload.tasks,
 			...state,
-			tasks: action.payload,
+			tasks: action.payload.tasks,
+			// no longer the case since we are using the middleware now 
+			// tasks: action.payload,
+
+			/* 
+			Wrong! 
+			In the book they mentioned that we will use just action.payload to get the tasks, but in my 
+			implementation if I follow their advice, I get a wrong data structure (tasks.tasks) which messes
+			with my components!
+
+			I will stick to my approach since I am using a different client.
+			*/
 			isLoading: false,
 		}
 	}
@@ -36,7 +45,8 @@ export function tasksReducer(state = initialState, action) {
 		}
 	}
 	if (action.type === "CREATE_TASK_SUCCEEDED") {
-		return { tasks: state.tasks.concat(action.payload) }
+		// the createTask.task part is conforming to the graphql query 
+		return { tasks: state.tasks.concat(action.payload.createTask.task) }
 	}
 	if (action.type === "EDIT_TASK_SUCCEEDED") {
 		const taskToUpdate = state.tasks.find((task) => task.id === action.payload.id)

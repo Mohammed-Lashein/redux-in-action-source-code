@@ -1,3 +1,4 @@
+import { toast } from 'sonner'
 import { graphqlClient } from "../../graphqlClient"
 
 // This is an action
@@ -23,6 +24,9 @@ export const apiMiddleware = (store) => (next) => async (action) => {
 	}
 
 	if (data) {
+		if(data.createTask) {
+			toast.success(data.createTask.message)
+		}
 		return next({
 			type: successType,
 			payload: data,

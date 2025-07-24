@@ -1,5 +1,6 @@
 import { graphqlClient } from "../../graphqlClient"
 
+// This is an action
 export const CALL_API = "Call Api"
 
 export const apiMiddleware = (store) => (next) => async (action) => {

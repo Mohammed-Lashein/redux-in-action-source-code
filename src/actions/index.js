@@ -29,27 +29,14 @@ export function fetchTasks() {
 		}
 	}
 }
-export function createTaskSucceeded({ title, description, id }) {
-	return {
-		type: "CREATE_TASK_SUCCEEDED",
-		payload: {
-			id,
-			title,
-			description,
-			// You can use the value returned from the query.
-			// I wrote the value manually as it is less likely to change
-			status: "Unstarted",
-		},
-		meta: {
-			analytics: {
-				event: 'create_task',
-				data: {
-					id
-				}
-			}
-		}
-	}
-}
+/* 
+	Even though our reducer handles only CREATE_TASK_SUCCEEDED, we need to provide the 3 states in order
+	for our generic middleware to stay working
+*/
+export const CREATE_TASK_STARTED = 'CREATE_TASK_STARTED'
+export const CREATE_TASK_SUCCEEDED = 'CREATE_TASK_SUCCEEDED'
+export const CREATE_TASK_FAILED = 'CREATE_TASK_FAILED'
+
 export function createTask({ title, description }) {
 	const createTaskQuery = `
 	mutation CREATE_TASK($newTaskDetails: TaskInput) {
@@ -73,15 +60,13 @@ export function createTask({ title, description }) {
 			status: "Unstarted",
 		}
 	}
-	return async (dispatch) => {
-		const { data, error } = await graphqlClient({ query: createTaskQuery, variables })
 
-		if (error) {
-			console.log(error)
-			return
+	return {
+		[CALL_API]: {
+			types: [CREATE_TASK_STARTED , CREATE_TASK_SUCCEEDED, CREATE_TASK_FAILED],
+			query: createTaskQuery,
+			variables
 		}
-		dispatch(createTaskSucceeded(data.createTask.task))
-		toast.success(data.createTask.message)
 	}
 }
 

@@ -10,7 +10,7 @@ export const apiMiddleware = (store) => (next) => async (action) => {
 	}
 
 	const { query, variables } = callApi
-	const [requestStartedType, succeededType, failureType] = callApi.types
+	const [requestStartedType, successType, failureType] = callApi.types
 	next({ type: requestStartedType })
 
 	const { data, error } = await graphqlClient({ query, variables })
@@ -24,7 +24,7 @@ export const apiMiddleware = (store) => (next) => async (action) => {
 
 	if (data) {
 		return next({
-			type: succeededType,
+			type: successType,
 			payload: data,
 		})
 	}

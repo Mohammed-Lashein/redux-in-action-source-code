@@ -12,7 +12,7 @@ export let analytics = store => next => action =>{
 
   /* 
     The below code is not working, and I wondered why.
-    I thought that I had a format for the store's state so I logged it, but it was the structure I expected.
+    I thought that the store had a state format different from what I remember, so I logged it, but it was the structure I expected.
 
     It took me some time to know why the task is undefined.
 

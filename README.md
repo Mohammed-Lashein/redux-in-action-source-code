@@ -139,3 +139,7 @@ return makeCall(callApi.endpoint)
 ```
 The answer: It is coming from axios. Axios does that by default unlike fetch which gives
 us the data when we use `response.json()`
+
+____
+### Note 4
+In redux middleware, `next` dispatches an `action` to the store.

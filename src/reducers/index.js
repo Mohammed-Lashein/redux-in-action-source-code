@@ -16,10 +16,19 @@ export function tasksReducer(state = initialState, action) {
 	}
 	if (action.type === "FETCH_TASKS_SUCCEEDED") {
 		return {
-			// no longer the case since we are using the middleware now 
-			// tasks: action.payload.tasks,
 			...state,
-			tasks: action.payload,
+			tasks: action.payload.tasks,
+			// no longer the case since we are using the middleware now 
+			// tasks: action.payload,
+
+			/* 
+			Wrong! 
+			In the book they mentioned that we will use just action.payload to get the tasks, but in my 
+			implementation if I follow their advice, I get a wrong data structure (tasks.tasks) which messes
+			with my components!
+
+			I will stick to my approach since I am using a different client.
+			*/
 			isLoading: false,
 		}
 	}

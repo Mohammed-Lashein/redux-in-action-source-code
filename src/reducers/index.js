@@ -45,7 +45,8 @@ export function tasksReducer(state = initialState, action) {
 		}
 	}
 	if (action.type === "CREATE_TASK_SUCCEEDED") {
-		return { tasks: state.tasks.concat(action.payload) }
+		// the createTask.task part is conforming to the graphql query 
+		return { tasks: state.tasks.concat(action.payload.createTask.task) }
 	}
 	if (action.type === "EDIT_TASK_SUCCEEDED") {
 		const taskToUpdate = state.tasks.find((task) => task.id === action.payload.id)

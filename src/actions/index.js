@@ -113,3 +113,37 @@ export function editTask(id, params = {}) {
 		toast.success(data.updateTaskStatus.message)
 	}
 }
+
+export const EDIT_TASK_STARTED = 'EDIT_TASK_STARTED'
+export const EDIT_TASK_SUCCEEDED = 'EDIT_TASK_SUCCEEDED'
+export const EDIT_TASK_FAILED = 'EDIT_TASK_FAILED'
+
+export function editTaskUsingMiddleWare(id, params = {}) {
+		const updateTaskStatusMutation = `
+	mutation UPDATE_TASK_STATUS($taskId: ID, $newStatus: String) {
+		updateTaskStatus(id: $taskId, status: $newStatus) {
+			code
+			success
+			message
+			task {
+			id
+			title
+			description
+			status
+			}
+		}
+	}
+	`
+	const variables = {
+		taskId: id,
+		newStatus: params.status,
+	}
+
+	return {
+		[CALL_API]: {
+			types: [EDIT_TASK_STARTED, EDIT_TASK_SUCCEEDED, EDIT_TASK_FAILED],
+			query: updateTaskStatusMutation,
+			variables
+		}
+	}
+}	

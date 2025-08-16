@@ -2,7 +2,7 @@ import { connect } from "react-redux"
 import "./App.css"
 import TasksPage from "./components/TasksPage.jsx"
 import { Component } from "react"
-import { createTask, editTask, fetchTasks } from "./actions/index.js"
+import { createTask, editTask, editTaskUsingMiddleWare, fetchTasks } from "./actions/index.js"
 import { Toaster } from "sonner"
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
 		this.props.dispatch(createTask({ title, description }))
 	}
 	onTaskStatusChange = (id, { status }) => {
-		this.props.dispatch(editTask(id, { status }))
+		this.props.dispatch(editTaskUsingMiddleWare(id, { status }))
 	}
 	render() {
 		return (

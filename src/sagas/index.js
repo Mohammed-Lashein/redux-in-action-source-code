@@ -1,10 +1,11 @@
-import { call, fork, put, take } from 'redux-saga/effects';
+import { call, delay, fork, put, take, takeEvery } from 'redux-saga/effects';
 import { graphqlClient } from '../graphqlClient';
 
 export function* rootSaga() {
   console.log('hello from root saga!!!');
   // a non-blocking call that makes a certain saga watch for a specific action type
   yield fork(watchFetchTasks)
+  yield takeEvery('TIMER_STARTED',handleProgressTimer)
 }
 function* watchFetchTasks() {
   console.log('hello from watchFetchTasks fn!!!');
@@ -41,5 +42,19 @@ function* watchFetchTasks() {
         }
       })
     }
-  } 
+  }
+}
+// every saga gets the action obj from redux by default -- although not explicitly mentioned in the book
+function* handleProgressTimer(action) {
+  console.log('This is the action obj from the handleProgressTimer saga');
+  console.log(action);
+  while(true) {
+    yield delay(1000)
+    yield put({
+      type: "TIMER_INCREMENT",
+      payload: {
+        taskId: action.payload.taskId
+      }
+    })
+  }
 }

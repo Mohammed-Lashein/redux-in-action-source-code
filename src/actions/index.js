@@ -110,6 +110,9 @@ export function editTaskSucceeded(id, params = {}) {
 		},
 	}
 }
+function startProgressTimer(taskId) {
+	return {type: 'TIMER_STARTED', payload: {taskId}}
+}
 export function editTask(id, params = {}) {
 	const updateTaskStatusMutation = `
 	mutation UPDATE_TASK_STATUS($taskId: ID, $newStatus: String) {

@@ -15,8 +15,14 @@ export function tasksReducer(state = initialState, action) {
 		}
 	}
 	if (action.type === "FETCH_TASKS_SUCCEEDED") {
+		/* 
+			Instead of modifying the database and asking the backend to add a table in the db, I will manually add
+			the timer property here
+		*/
+		const tasksWithTimerPropertyAdded = action.payload.tasks.map((task) =>  ({...task, timer: 0}))
+		
 		return {
-			tasks: action.payload.tasks,
+			tasks: tasksWithTimerPropertyAdded,
 		}
 	}
 	if(action.type === "FETCH_TASKS_FAILED") {

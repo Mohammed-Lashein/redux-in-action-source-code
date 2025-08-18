@@ -28,6 +28,7 @@ function Task(props) {
 			</header>
 			<hr />
 			<p className='task-body'>{props.task.description}</p>
+			<p className='task-timer' style={{textAlign: 'right'}}>{props.task.timer ?? 0}s</p>
 		</div>
 	)
 }

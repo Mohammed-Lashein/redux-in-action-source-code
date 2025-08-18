@@ -7,7 +7,8 @@ import { Toaster } from "sonner"
 
 class App extends Component {
 	componentDidMount() {
-		this.props.dispatch(fetchTasks())
+		// this.props.dispatch(fetchTasks())
+		this.props.dispatch({type: "FETCH_TASKS_STARTED"})
 	}
 	onCreateTask = ({ title, description }) => {
 		this.props.dispatch(createTask({ title, description }))
@@ -38,6 +39,7 @@ class App extends Component {
 function mapStateToProps(state) {
 	const { tasks, isLoading, error } = state.tasks
 	return {
+		// tasks: [],
 		tasks,
 		isLoading,
 		error,

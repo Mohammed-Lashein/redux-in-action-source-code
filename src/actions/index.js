@@ -137,7 +137,7 @@ export function editTask(id, params = {}) {
 		const {data, error} = await graphqlClient({query: updateTaskStatusMutation, variables})
 		console.log('data coming from updateTaskStatus mutation');
 		console.log(data);
-		
+
 		if(error) {
 			console.log(error);
 			// add a toast for errors!
@@ -147,5 +147,9 @@ export function editTask(id, params = {}) {
 
 		dispatch(editTaskSucceeded(task.id, {status:task.status}))
 		toast.success(data.updateTaskStatus.message)
+
+		if(task.status === 'In Progress') {
+			dispatch(startProgressTimer(task.id))
+		}
 	}
 }

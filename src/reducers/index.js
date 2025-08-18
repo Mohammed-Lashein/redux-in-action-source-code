@@ -49,6 +49,21 @@ export function tasksReducer(state = initialState, action) {
 			tasks: [...tasksWithoutTaskToUpdate, taskToUpdateWithUpdatedData]
 		}
 	}
+	if(action.type === 'TIMER_INCREMENT') {
+		const updatedTasks = state.tasks.map((task) => {
 
+			if(task.id === action.payload.taskId) {
+				return {
+					...task, // spread the object to ensure that we get a new copy of the obj and not mutate the one 
+					// we are looping on
+					timer: task.timer + 1
+				}
+			}
+			return task
+		})
+		return {
+			tasks: updatedTasks
+		}
+	}
 	return state
 }

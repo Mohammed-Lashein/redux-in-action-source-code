@@ -143,7 +143,9 @@ export function editTask(id, params = {}) {
 			// add a toast for errors!
 			return
 		}
-		dispatch(editTaskSucceeded(data.updateTaskStatus.task.id, {status: data.updateTaskStatus.task.status}))
+		const task = data.updateTaskStatus.task
+
+		dispatch(editTaskSucceeded(task.id, {status:task.status}))
 		toast.success(data.updateTaskStatus.message)
 	}
 }

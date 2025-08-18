@@ -105,3 +105,56 @@ I will go with the 2nd approach.
 ## Chapter 5 Notes
 ### Note 1: where does middleware live in `redux`?  
 Redux middleware is the code that sets between an action being dispatched and the store passing the action to the reducer.
+## Chapter 6 Redux saga notes
+Note that the `delay` function was moved from `redux-saga` to `redux-saga/effects` in [v1.0](https://github.com/redux-saga/redux-saga/releases/tag/v1.0.0).  
+I actually asked chat first then searched github about this change in releases notes.
+
+So the old code present in the book in `handleProgressTimer`:
+```js
+while(true) {
+    yield call(delay, 1000)
+}
+```
+will be turned into: 
+```js
+while(true) {
+	yield delay(1000)
+}
+```
+______
+### bad code to watch for
+```js
+	if(action.type === 'TIMER_INCREMENT') {
+		const updatedTasks = state.tasks.map((task) => {
+
+			if(task.id === action.payload.taskId) {
+				task.timer += 1
+			}
+			return task
+		})
+
+		return {
+			tasks: updatedTasks
+		}
+	}
+```
+The above code breaks immutability rules(you can use it in `RTK` because it uses `Immer` out of the box), instead you should: 
+```js
+	if(action.type === 'TIMER_INCREMENT') {
+		const updatedTasks = state.tasks.map((task) => {
+
+			if(task.id === action.payload.taskId) {
+				return {
+					...task, // spread the object to ensure that we get a new copy of the obj and not mutate the one 
+					// we are looping on
+					timer: task.timer + 1
+				}
+			}
+			return task
+		})
+
+		return {
+			tasks: updatedTasks
+		}
+	}
+```
